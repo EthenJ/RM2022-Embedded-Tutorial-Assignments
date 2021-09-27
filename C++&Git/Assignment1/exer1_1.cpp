@@ -16,14 +16,16 @@ int main()
     cin >> secRaw;
 
     /* Write your code under this line */
-    // day = ?
-    // hour = ?
-    // min = ?
-    // sec = ?
+    const int MIN = 60, HOUR = 60 * MIN, DAY = 24 * HOUR;
+    day = secRaw / DAY;
+    hour = (secRaw - DAY * day) / HOUR;
+    min = (secRaw - DAY * day - HOUR * hour) / MIN;
+    sec = (secRaw - DAY * day - HOUR * hour - MIN * min);
     /* Write your code above this line */
 
     // output the result
-    cout << secRaw << " seconds = " << day << " days, " << hour << " hours, " << min << " mins, " << sec << " secs." << endl;
+    cout
+        << secRaw << " seconds = " << day << " days, " << hour << " hours, " << min << " mins, " << sec << " secs." << endl;
 
     // end of the program
     return 0;
