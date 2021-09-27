@@ -14,58 +14,16 @@ Before doing this assignment, you should already know the following things:
 1. Please write down the upper and lower bound of the following types:
 
    - For example: **uint16_t**: 0~65535
-   - **uint8_t**
-   - **int8_t**
-   - **int16_t**
+   - **uint8_t** 
+   - **int8_t** 
+   - **int16_t**   
      (Please read [this page](https://stackoverflow.com/questions/5054979/why-is-uint-8-etc-used-in-c-c) if you do not know uint8_t and int8_t)
 
 2. What is the difference between the following values (What is their default type in C++)  
    2022 2022L 2022.0 2022.0f
 
-3. Define a structure, which includes year, month, day and time information. Then define a variable of this structure and initialize it.
-----
-## My answers
+3. Define a structure, which includes year, month, day and time information(i.e. Hours, Minutes, Seconds). Then define a variable of this structure and initialize it.
 
-1. **uint8_t**: 0~255
-   **int8_t**: -128~127  
-   **int16_t**: -32768~32767  
-
-2. values| 2022|2022L|2022.0|2022.0f
-   |----|----|----|----|----|
-   default type|int|long|double|float
-
-3.
-
-```cpp
-#include <iostream>
-using namespace std;
-
-struct my_structure
-{ 
-   int year;
-   int month;
-   int day;
-   int time;
-}; // Define a structure
-
-{
-void init_my_structure(my_structure& m, int year, int month, int day, int time)
-{
-   m.year = year;
-   m.month = month;
-   m.day = day;
-   m.time = time;
-}
-
-int main()
-{
-   const int INIT = 0;
-   my_structure m; // define a variable of this structure
-   init_my_structure(m, INIT, INIT, INIT, INIT); // initialize it
-   return 0;
-}
-```
-----
 ## Programing Exercise
 
 We have provided the skeleton code ([exer1_1.cpp](./exer1_1.cpp) and [exer1_2.cpp](./exer1_2.cpp)), you only need to complete the calculation part.

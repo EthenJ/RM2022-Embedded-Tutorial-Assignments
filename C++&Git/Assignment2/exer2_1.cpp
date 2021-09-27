@@ -17,18 +17,12 @@ int main()
         // second loop, to find the min number in the unsorted area
         for (int j = i; j < lengthOfArray; j++)
         {
-            if (arr[j] < arr[minIndex])
-            {
-                minIndex = j;
-            }
+            //edit here
+            
         }
         // swap two numbers
-        if (minIndex != i)
-        {
-            arr[minIndex] = arr[minIndex] ^ arr[i];
-            arr[i] = arr[minIndex] ^ arr[i];
-            arr[minIndex] = arr[minIndex] ^ arr[i];
-        }
+        // edit here
+        
     }
 
     // output the sorted array
@@ -40,7 +34,7 @@ int main()
         else
             cout << " < ";
     }
-
+    
     // end of the program
     return 0;
 }
