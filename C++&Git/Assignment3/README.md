@@ -36,6 +36,44 @@ Before doing this assignment, you should already know the following things:
 
 2. Briefly describe the benefits of putting the function prototype in the header file.
 
+----
+## My answers
+
+### 1. 
+-
+   ```cpp
+   int replace(char str[], int len, char a, char b)
+   {
+      int replacements = 0;
+      for (int i = 0; i < len; i++)
+      {
+         if (str[i] == a)
+         {
+            str[i] = b;
+            replacements++;
+         }
+      }
+      return replacements;
+   }
+   ```
+
+-
+   ```cpp
+   Polar cartesian2Polar(Cartesian pos)
+   {
+      Polar p_pos;
+      p_pos.x = sqrt(pow(pos.x, 2) + pow(pos.y, 2));
+      p_pos.y = atan(pos.y / pos.x);
+      return p_pos;
+   }
+   ```
+
+### 2.
+1.	When compiling, the compiler will read the code line by line from the top to the end. By putting the function prototype in the header file, the compiler will know the function we use. Hence it would avoid the compilation error when we try to call a function before it is declared.
+2.	By putting the function prototype in the header file, the ide will know the function. When we use the function before it is declared, it will remind us of its name and type. Coding would be much easier😊.
+3.	These function prototypes are put into the header file, so we do not need to repeat them when building a massive project with divided .cpp files. We just need to include the .h file at the top of each .cpp file. This saves a lot of time and space while coding.
+----
+
 ## Programing Exercise
 
 1. Write a function which input a string(char array) and two numbers (let say a and b). The function should reverse all the item between and including the index a and b. And it returns a bool indecates if the input is valid. (You can define helper functions if needed)  
