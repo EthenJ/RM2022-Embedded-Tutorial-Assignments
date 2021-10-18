@@ -38,7 +38,9 @@ while (cin.get(ch)) {
    line++;
 }
 ```
+
 Hint: your code should look like this:
+
 ```c
 while (conditions) {
    if (conditions) {
@@ -46,11 +48,62 @@ while (conditions) {
    }
 }
 ```
+----
+## My answers
 
+### 1. the output is
+```bash
+1
+3
+5
+7
+```
+
+### 2. 
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   for (int i = 1, var = 2; i <= 10; i++)
+   {
+      cout << var << " ";
+      var *= 2;
+   }
+}
+```
+
+### 3.
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   int line = 0;
+   char ch;
+
+   cin.get(ch);
+   while (ch != 'Q')
+   {
+      if (ch == '\n')
+      {
+         line++;
+      }
+      cin.get(ch);
+   }
+}
+```
+
+
+----
 ## Programming Exercise
+
 In this exercise, you need to arrange an array of integers in ascending order using selection sort.  
 The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array.  
 For example: we have array arr = [5,10,6,2,3], and integer i indicating the first i elements are sorted.
+
 - **i=0**: find the min of array from **0** to 4 which is 2, then swap it with the element **0**. arr = [2,10,6,5,3]
 - **i=1**: find the min of array from **1** to 4 which is 3, then swap it with the element **1**. arr = [2,3,6,5,10]
 - **i=2**: find the min of array from **2** to 4 which is 5, then swap it with the element **2**. arr = [2,3,5,6,10]
@@ -71,13 +124,15 @@ g++ -o exer_run2_1 exer2_1.cpp
 ./exer_run2_1
 ```
 
-
 ## Additional Exercise
+
 ### NO BONUS POINTS, just for fun :)
 
 ### The Rod Cutting Problem description  
+
 Given a rod of length $n$ and prices $p_i$ for $i = 1, ..., n$, where $p_i$ is the price of a rod of length $i$. Find a way to cut the rod to maximize total revenue.  
 For example, $n=4,p_n=\{2,5,6,11\}$. For the length of 4 rod, there are the following cutting methods:  
+
 - 4 (11)
 - 3+1 (8)
 - 2+2 (10)
