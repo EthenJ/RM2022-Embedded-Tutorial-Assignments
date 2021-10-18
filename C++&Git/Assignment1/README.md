@@ -26,9 +26,9 @@ Before doing this assignment, you should already know the following things:
 ----
 ## My answers
 
-1. **uint8_t**: 0~255
-   **int8_t**: -128~127  
-   **int16_t**: -32768~32767  
+1. **uint8_t**: 0\~255  
+   **int8_t**: -128\~127  
+   **int16_t**: -32768\~32767  
 
 2. values| 2022|2022L|2022.0|2022.0f
    |----|----|----|----|----|
