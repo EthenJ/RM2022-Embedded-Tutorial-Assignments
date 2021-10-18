@@ -16,9 +16,10 @@ int main()
     cin >> hourRaw;
 
     /* Write your code under this line */
-    // hour = ?
-    // min = ?
-    // sec = ?
+    const int MIN = 60, HOUR = 60 * MIN;
+    hour = hourRaw;
+    min = (hourRaw - hour) * MIN;
+    sec = (hourRaw - hour) * HOUR - min * MIN;
     /* Write your code above this line */
 
     // output the result
