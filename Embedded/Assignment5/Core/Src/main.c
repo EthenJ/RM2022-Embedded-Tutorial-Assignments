@@ -59,7 +59,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
+inline void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
 {
   if (*input == '#') // calculate a + b and output
   {
