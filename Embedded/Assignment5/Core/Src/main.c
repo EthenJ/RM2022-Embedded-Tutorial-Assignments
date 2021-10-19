@@ -74,15 +74,18 @@ inline void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
       c_l++;
     }
 
-    output[0] = '!';
-    output[c_l + 1] = '#';
+    output[0] = 'a';
+    output[1] = 'n';
+    output[2] = 's';
+    output[3] = '!';
+    output[c_l + 4] = '#';
     for (int i = c_l; i >= 1; i--) // generate output array
     {
       output[i] = c % 10 + '0';
       c /= 10;
     }
 
-    HAL_UART_Transmit(&huart1, output, c_l + 2, 100); // output the result
+    HAL_UART_Transmit(&huart1, output, c_l + 5, 100); // output the result
 
     *s = 0, *a = 0, *b = 0; // get ready for the next session
   }
