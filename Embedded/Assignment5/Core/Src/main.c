@@ -61,18 +61,12 @@ static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN 0 */
 inline void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
 {
-  if (*input == '#') // calculate a + b and output
+  if (*input == '#') // well recieved, calculate a + b and output
   {
     int c, c_l = 0;
-    for (int i = 0; i < 64; i++)
-    {
-      output[i] = '\0';
-    }
     c = *a + *b;                // c = a + b
     for (int d = c; d; d /= 10) // get the length of c
-    {
       c_l++;
-    }
 
     output[0] = 'a';
     output[1] = 'n';
@@ -81,7 +75,7 @@ inline void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
     output[c_l + 4] = '#';
     for (int i = c_l; i >= 1; i--) // generate output array
     {
-      output[i] = c % 10 + '0';
+      output[i] = c % 10 + '0'; // cast from int to char
       c /= 10;
     }
 
@@ -89,21 +83,21 @@ inline void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
 
     *s = 0, *a = 0, *b = 0; // get ready for the next session
   }
-  else if (*input == '!') // begin to collect variable a
+  else if (*input == '!') // session started
   {
-    *s = 1;
+    *s = 1; // ready to collect variable a
   }
-  else if (*input == ':') // begin to collect variable b
+  else if (*input == ':') 
   {
-    *s = 2;
+    *s = 2; // ready to collect variable b
   }
   else if (*s == 1) // collect and store variable a
   {
-    *a = *a * 10 + (*input - '0');
+    *a = *a * 10 + (*input - '0'); // from char to int
   }
   else if (*s == 2) // collect and store variable b
   {
-    *b = *b * 10 + (*input - '0');
+    *b = *b * 10 + (*input - '0'); // from char to int
   }
 }
 /* USER CODE END 0 */
