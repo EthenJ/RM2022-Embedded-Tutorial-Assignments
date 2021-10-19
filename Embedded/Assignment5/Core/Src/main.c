@@ -59,89 +59,50 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t m[256] = {0};
-uint8_t output[16] = {0};
-int i = 0;
-uint8_t r[3] = {'a', 'n', 's'};
-
-void solve()
+void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
 {
-  // static volatile int c1_11 = 0;
-  int a = 0, b = 0, c = 0, c_l = 0, s = 0, d = 1;
-
-  for (int j = 0; j < 16; j++)
+  if (*input == '#') // calculate a + b and output
   {
-    output[j] = 0;
+    int c, c_l = 0;
+    for (int i = 0; i < 64; i++)
+    {
+      output[i] = '\0';
+    }
+    c = *a + *b;                // c = a + b
+    for (int d = c; d; d /= 10) // get the length of c
+    {
+      c_l++;
+    }
+
+    output[0] = '!';
+    output[c_l + 1] = '#';
+    for (int i = c_l; i >= 1; i--) // generate output array
+    {
+      output[i] = c % 10 + '0';
+      c /= 10;
+    }
+
+    HAL_UART_Transmit(&huart1, output, c_l + 2, 100); // output the result
+
+    *s = 0, *a = 0, *b = 0;
   }
-
-  for (int j = i; j >= 0; j--)
+  else if (*input == '!') // begin to collect variable a
   {
-    if (m[j] == '!')
-    {
-      c = a + b;
-      c_l = 0;
-      for (int e = c; e; e /= 10)
-        c_l++;
-      output[0] = '!';
-      output[c_l + 1] = '#';
-      for (int j = c_l; j > 0; j--)
-      {
-        output[j] = c % 10 + '0';
-        c /= 10;
-      }
-      for (int j = c_l + 2; j < 16; j++)
-      {
-        output[j] = '\0';
-      }
-      // c1_11 = c_l;
-      HAL_UART_Transmit(&huart1, output, c_l + 2, 50);
-      for (int j = 0; j < 256; j++)
-      {
-        m[j] = '\0';
-      }
-      return;
-    }
-    else if (m[j] == '#')
-    {
-      s = 1, d = 1;
-    }
-    else if (m[j] == ':')
-    {
-      s = 2, d = 1;
-    }
-    else if (s == 1)
-    {
-      a += (m[j] - '0') * d;
-      d *= 10;
-    }
-    else if (s == 2)
-    {
-      b += (m[j] - '0') * d;
-      d *= 10;
-    }
+    *s = 1;
+  }
+  else if (*input == ':') // begin to collect variable b
+  {
+    *s = 2;
+  }
+  else if (*s == 1) // collect and store variable a
+  {
+    *a = *a * 10 + (*input - '0');
+  }
+  else if (*s == 2) // collect and store variable b
+  {
+    *b = *b * 10 + (*input - '0');
   }
 }
-
-void store(uint8_t input[1])
-{
-  if (input[0] == '!')
-  {
-    for (int j = 0; j < 256; j++)
-    {
-      m[j] = '\0';
-    }
-    m[i] = '!';
-  }
-  m[i] = input[0];
-  if (m[i] == '#')
-  {
-    HAL_UART_Transmit(&huart1, r, 3, 10);
-    solve();
-  }
-  i++;
-  input[0] = '\0';
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -175,6 +136,8 @@ int main(void)
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  int a = 0, b = 0, s = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -184,11 +147,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    uint8_t input[1] = {};
-    while (HAL_UART_Receive(&huart1, input, 1, 50) == HAL_OK)
+    uint8_t input[1] = {'\0'};
+    uint8_t output[64] = {'\0'};
+    while (HAL_UART_Receive(&huart1, input, 1, 100) == HAL_OK)
     {
-      HAL_UART_Transmit(&huart1, input, 1, 50);
-      store(input);
+      HAL_UART_Transmit(&huart1, input, 1, 100);
+      solve(input, output, &a, &b, &s);
     }
     input[0] = '\0';
     HAL_Delay(1);
