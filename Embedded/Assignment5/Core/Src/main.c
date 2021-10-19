@@ -84,7 +84,7 @@ void solve(uint8_t *input, uint8_t output[64], int *a, int *b, int *s)
 
     HAL_UART_Transmit(&huart1, output, c_l + 2, 100); // output the result
 
-    *s = 0, *a = 0, *b = 0;
+    *s = 0, *a = 0, *b = 0; // get ready for the next session
   }
   else if (*input == '!') // begin to collect variable a
   {
